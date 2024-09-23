@@ -1,44 +1,8 @@
--- SCHEMA MANAGEMENT --
-
-INSERT INTO organizations (name)
-VALUES ('vitekorp');
-
-INSERT INTO authorities (name, userid)
-VALUES (
-    'ADMIN',
-    1
-  );
-
-INSERT INTO users (
-    name,
-    email,
-    organizationid,
-    password,
-    enabled
-  )
-VALUES (
-    'nuko',
-    'vtsmolinski@outlook.com',
-    metaorg,
-    encode(pgp_sym_encrypt('linvic2024', 'linvic2024'), 'hex'),
-    true
-  );
 
 select 
     pgp_sym_decrypt(decode(password, 'hex')::bytea, 'linvic2024') 
 from users
-where name = 'nuko'
-
-INSERT INTO userauthorities (authorityid, userid)
-VALUES (
-    1,
-    1
-  );
-
-alter table users
-add constraint unique_useremail unique (email);
-
--- SELECTS --
+where name = 'nukmaster'
 
 select users.name as username,
     pgp_sym_decrypt(decode(users.password, 'hex')::bytea, 'linvic2024') as password,
@@ -52,7 +16,7 @@ from userauthorities
         on userauthorities.authorityid = authorities.id
     inner join organizations
         on users.organizationid = organizations.id
-where users.name = 'nuko';
+where users.name = 'nukmaster';
 
 select 
     devices.name,
