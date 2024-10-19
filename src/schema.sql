@@ -39,14 +39,3 @@ create table Devices (
 	WgAddress varchar(16),
     OrganizationID integer references Organizations(ID) not null
 );
-
-create table DeviceCredentials (
-	ID SERIAL primary key not null unique,
-	ControllerID UUID references Devices(ControllerID) not null,
-	SSHPrivateKey varchar(2048) not null unique,
-	SSHPublicKey varchar(2048) not null unique,
-	WgPrivateKey varchar(2048) not null unique,
-	WgPublicKey varchar(2048) not null unique,
-	Mongodbcertfs varchar(2048) not null,
-	Passwd varchar(256)
-);
