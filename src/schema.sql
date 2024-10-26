@@ -10,7 +10,7 @@ create table Organizations (
 
 create table Users (
 	ID SERIAL primary key not null unique,
-	Name varchar(50) not null,
+	Name varchar(50) not null unique,
 	Email varchar(120) not null unique,
 	OrganizationID integer references Organizations(ID) not null,
 	Password varchar(256) not null,
